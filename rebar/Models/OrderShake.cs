@@ -1,16 +1,18 @@
-﻿namespace rebar.Models
+﻿using System.Drawing;
+
+namespace rebar.Models
 {
     public class OrderShake
     {
         private string _name;
-        private string _size;
+        private Size _size;
         private decimal _price;
 
         // Constructor
         public OrderShake(string name, string size, decimal price)
         {
             _name = name;
-            _size = size;
+            _size = (Size)Enum.Parse(typeof(Size), size); 
             _price = price;
         }
 
@@ -28,11 +30,11 @@
         // Property for _size
         public string Size
         {
-            get { return _size; }
+            get { return _size.ToString(); }
             set
             {
-                if (value == "L" || value == "M" || value == "S")
-                    _size = value;
+                if (value == "Small" || value == "Medium" || value == "Large")
+                    _size = (Size)Enum.Parse(typeof(Size), value);
             }
         }
 
