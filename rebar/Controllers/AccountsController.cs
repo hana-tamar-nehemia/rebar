@@ -21,15 +21,16 @@ namespace rebar.Controllers
 
         // GET: api/<AccountsController>
         [HttpGet]
-        public ActionResult<List<Account>> Get()
+ /*       public ActionResult<List<Account>> Get()
         {
             return _accountServise.Get();
         }
-       /* public async Task<IActionResult> Get()
+       */
+        public async Task<IActionResult> Get()
         {
             var accounts = await _accountServise.Get();
             return Ok(accounts);
-        }*/
+        }
 
         // GET api/<AccountsController>/5
         [HttpGet("{id}")]

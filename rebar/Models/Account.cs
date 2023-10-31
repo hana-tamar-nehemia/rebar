@@ -6,10 +6,8 @@ namespace rebar.Models
     [BsonIgnoreExtraElements]
     public class Account
     {
-        [BsonElement("orders")]
         private List<Order> _orders;
 
-        [BsonElement("totalOrderPrice")]
         private decimal _totalOrderPrice;
 
        public Account(List<Order> orders, decimal totalOrderPrice)

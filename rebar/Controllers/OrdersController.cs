@@ -10,26 +10,26 @@ namespace rebar.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-            private readonly IOrderService orderServise;
+            private readonly IOrderService _orderServise;
 
             public OrdersController(IOrderService orderService)
             {
 
-                this.orderServise = orderService;
+                _orderServise = orderService;
             }
 
             // GET: api/<OrdersController>
             [HttpGet]
         public ActionResult<List<Order>> Get()
         {
-            return orderServise.Get();
+            return _orderServise.Get();
         }
 
         // GET api/<OrdersController>/5
         [HttpGet("{id}")]
         public ActionResult<Order> Get(Guid id)
         {
-            var order = orderServise.Get(id);
+            var order = _orderServise.Get(id);
 
             if (order == null)
             {
@@ -42,7 +42,7 @@ namespace rebar.Controllers
         [HttpPost]
         public ActionResult<Order> Post([FromBody] Order order)
         {
-            orderServise.Creat(order);
+            _orderServise.Creat(order);
 
             return CreatedAtAction(nameof(Get), new { id = order.Id }, order);
         }
@@ -51,13 +51,13 @@ namespace rebar.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(Guid id, [FromBody] string value)
         {
-            var order = orderServise.Get(id);
+            var order = _orderServise.Get(id);
 
             if(order == null)
             {
                 return NotFound($"shake with id = {id} not found");
             }
-            orderServise.Delete(order.Id);
+            _orderServise.Delete(order.Id);
 
             return Ok($"order with id = {id} deleted");
         }
@@ -66,7 +66,7 @@ namespace rebar.Controllers
         [HttpDelete("{id}")]
         public void Delete(Guid id)
         {
-            orderServise.Delete(id);
+            _orderServise.Delete(id);
         }
     }
 }

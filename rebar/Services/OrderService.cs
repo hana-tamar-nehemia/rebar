@@ -1,29 +1,31 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using rebar.Models;
 
 namespace rebar.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IMongoCollection<Order> _order;
-
-        public OrderService(IOrderDatabaseSettings settings, IMongoClient mongoClient)
+        private readonly IMongoCollection<Order> _orderCollection;
+        private readonly IOptions<DatabaseSettings> _settings;
+        public OrderService(IOptions<DatabaseSettings> settings)
         {
+            _settings = settings;
 
-            var database = mongoClient.GetDatabase(settings.DatabaseName);
-
-            _order = database.GetCollection<Order>(settings.OrderCollectionName);
-
+            var mongoClient = new MongoClient(_settings.Value.ConnectionString);
+            var mongoDatabase = mongoClient.GetDatabase(_settings.Value.DatabaseName);
+            _orderCollection = mongoDatabase.GetCollection<Order>
+                (_settings.Value.OrderCollectionName);
         }
 
         public List<Order> Get()
         {
-            return _order.Find(order => true).ToList();
+            return _orderCollection.Find(order => true).ToList();
         }
 
         public Order Creat(Order order)
         {
-            _order.InsertOne(order);
+            _orderCollection.InsertOne(order);
             return order;
         }
 
@@ -34,7 +36,7 @@ namespace rebar.Services
 
         public Order Get(Guid orderId)
         {
-            return _order.Find(order => order.Id == orderId).FirstOrDefault();
+            return _orderCollection.Find(order => order.Id == orderId).FirstOrDefault();
         }
 
     }

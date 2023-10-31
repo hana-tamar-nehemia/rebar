@@ -6,22 +6,16 @@ namespace rebar.Models
     [BsonIgnoreExtraElements]
     public class Shake
     {
-        [BsonId]
         private Guid _id;
 
-        [BsonElement("name")]
         private string _name;
 
-        [BsonElement("description")]
         private string _description;
 
-        [BsonElement("priceL")]
         private decimal _priceL;
 
-        [BsonElement("priceM")]
         private decimal _priceM;
 
-        [BsonElement("priceS")]
         private decimal _priceS;
 
         public Guid Id

@@ -6,24 +6,19 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace rebar.Models
 {
+    [BsonIgnoreExtraElements]
     public class Order
     {
-        [BsonId]
         private Guid _id;
 
-        [BsonElement("shakes")]
         private List<OrderShake> _shakes;
 
-        [BsonElement("totalPrice")]
         private decimal _totalPrice;
 
-        [BsonElement("customerName")]
         private string _customerName;
 
-        [BsonElement("orderDate")]
         private DateTime _orderDate;
 
-        [BsonElement("discounts")]
         private List<Discount> _discounts;
 
         public Order(List<OrderShake> shakes, decimal totalPrice, string customerName, DateTime orderDate, List<Discount> discounts)
