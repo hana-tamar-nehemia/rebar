@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using rebar.Models;
+using rebar.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,63 @@ namespace rebar.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        // GET: api/<OrdersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+            private readonly IOrderService orderServise;
+
+            public OrdersController(IOrderService orderService)
+            {
+
+                this.orderServise = orderService;
+            }
+
+            // GET: api/<OrdersController>
+            [HttpGet]
+        public ActionResult<List<Order>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return orderServise.Get();
         }
 
         // GET api/<OrdersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Order> Get(Guid id)
         {
-            return "value";
+            var order = orderServise.Get(id);
+
+            if (order == null)
+            {
+                return NotFound($"order with id = {id} not found");
+            }
+            return order;
         }
 
         // POST api/<OrdersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Order> Post([FromBody] Order order)
         {
+            orderServise.Creat(order);
+
+            return CreatedAtAction(nameof(Get), new { id = order.Id }, order);
         }
 
         // PUT api/<OrdersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(Guid id, [FromBody] string value)
         {
+            var order = orderServise.Get(id);
+
+            if(order == null)
+            {
+                return NotFound($"shake with id = {id} not found");
+            }
+            orderServise.Delete(order.Id);
+
+            return Ok($"order with id = {id} deleted");
         }
 
         // DELETE api/<OrdersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
+            orderServise.Delete(id);
         }
     }
 }

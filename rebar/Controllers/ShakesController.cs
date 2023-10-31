@@ -11,11 +11,11 @@ namespace rebar.Controllers
     [ApiController]
     public class ShakesController : ControllerBase
     {
-        private readonly IShakeServise shakeServise;
+        private readonly IShakeService shakeServise;
 
-        public ShakesController(IShakeServise shakeServise) {
+        public ShakesController(IShakeService shakeService) {
 
-            this.shakeServise = shakeServise;
+            this.shakeServise = shakeService;
         }
 
         // GET: api/<ShakesController>
@@ -29,7 +29,6 @@ namespace rebar.Controllers
         [HttpGet("{id}")]
         public ActionResult<Shake> Get(Guid id)
         {
-            //Guid guidId = new Guid(id);
             var shake = shakeServise.Get(id);
 
             if(shake == null) 
@@ -45,7 +44,7 @@ namespace rebar.Controllers
         {
             shakeServise.Creat(shake);
 
-            return CreatedAtAction(nameof(Get), new { id = shake.GetId() }, shake);
+            return CreatedAtAction(nameof(Get), new { id = shake.Id }, shake);
         }
 
         // PUT api/<ShakesController>/5

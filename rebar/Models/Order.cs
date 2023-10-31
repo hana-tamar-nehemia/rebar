@@ -8,16 +8,27 @@ namespace rebar.Models
 {
     public class Order
     {
-        private Guid _orderId;
+        [BsonId]
+        private Guid _id;
+
+        [BsonElement("shakes")]
         private List<OrderShake> _shakes;
+
+        [BsonElement("totalPrice")]
         private decimal _totalPrice;
+
+        [BsonElement("customerName")]
         private string _customerName;
+
+        [BsonElement("orderDate")]
         private DateTime _orderDate;
+
+        [BsonElement("discounts")]
         private List<Discount> _discounts;
 
         public Order(List<OrderShake> shakes, decimal totalPrice, string customerName, DateTime orderDate, List<Discount> discounts)
         {
-            _orderId = new Guid();
+            _id = new Guid();
             _shakes = shakes;
             _totalPrice = totalPrice;
             _customerName = customerName;
@@ -40,10 +51,10 @@ namespace rebar.Models
             }
         }
 
-        public Guid OrderId
+        public Guid Id
         {
-            get { return _orderId; }
-            set { _orderId = value; }
+            get { return _id; }
+            set { _id = value; }
         }
 
         public string CustomerName

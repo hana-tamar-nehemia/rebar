@@ -1,9 +1,9 @@
 ﻿namespace rebar.Models
 {
-    public class ShakeDatabaseSettings:IShakeDatabaseSettings
+    public class ShakeDatabaseSettings : IShakeDatabaseSettings
     {
-      public  string DatabaseName { get; set; } = String.Empty;
-      public string ConnectionString { get; set; } = String.Empty;
-      public string ShakeCollectionName { get; set; } = String.Empty;
+        public string DatabaseName { get; set; } = string.Empty;
+        public string ConnectionString { get; set; } = string.Empty;
+        public string ShakeCollectionName { get; set; } = string.Empty;
     }
 }

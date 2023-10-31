@@ -3,7 +3,7 @@ using rebar.Models;
 
 namespace rebar.Services
 {
-    public class ShakeService : IShakeServise
+    public class ShakeService : IShakeService
     {
         private readonly IMongoCollection<Shake> _shake;
 

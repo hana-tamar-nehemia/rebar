@@ -34,7 +34,7 @@ namespace rebar.Services
 
         public Order Get(Guid orderId)
         {
-            return _order.Find(order => order.OrderId == orderId).FirstOrDefault();
+            return _order.Find(order => order.Id == orderId).FirstOrDefault();
         }
 
     }
