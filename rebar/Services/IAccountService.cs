@@ -4,7 +4,7 @@ namespace rebar.Services
 {
     public interface IAccountService
     {
-        List<Account> Get();
+        Task<IEnumerable<Account>> Get();
         Task Creat(Account account);
     }
 }

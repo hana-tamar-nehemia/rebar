@@ -5,8 +5,8 @@ namespace rebar.Services
     public interface IShakeService
     {
         List<Shake> Get(); 
-        Shake Get(Guid shakeId);
+        Shake Get(string shakeId);
         Shake Creat(Shake shake);   
-        void Delete(Guid shakeId);    
+        void Delete(string shakeId);    
     }
 }

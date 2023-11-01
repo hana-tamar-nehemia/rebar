@@ -7,24 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-//service to Shake
-builder.Services.Configure<ShakeDatabaseSettings>(
-    builder.Configuration.GetSection(nameof(ShakeDatabaseSettings)));
-builder.Services.AddSingleton<IShakeDatabaseSettings>(sp => 
-    sp.GetRequiredService<IOptions<ShakeDatabaseSettings>>().Value);
-builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(
-    builder.Configuration.GetValue<string>("ShakeStoreDtabaseSetting:ConnecionString")));
-
 //service to Order
-builder.Services.Configure<OrderDatabaseSettings>(
-    builder.Configuration.GetSection(nameof(OrderDatabaseSettings)));
-builder.Services.AddSingleton<IOrderDatabaseSettings>(sp =>
-    sp.GetRequiredService<IOptions<OrderDatabaseSettings>>().Value);
-builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(
-    builder.Configuration.GetValue<string>("OrderStoreDtabaseSetting:ConnecionString")));
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));
+builder.Services.AddTransient<IOrderService, OrderService>();
+
+//service to Shake
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));//maybe to remove
+builder.Services.AddTransient<IShakeService, ShakeService>();
 
 //service to Account
-builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));//maybe to remove
 builder.Services.AddTransient<IAccountService, AccountService>();
 
 builder.Services.AddControllers();

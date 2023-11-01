@@ -17,13 +17,13 @@ namespace rebar.Services
             _accountCollection = mongoDatabase.GetCollection<Account>
                 (_settings.Value.AccountCollectionName);
         }
-        public List<Account> Get()
+ /*       public List<Account> Get()
         {
             return _accountCollection.Find( account => true).ToList();
-        }
-      /*  public async Task<IEnumerable<Account>> Get()=>
+        }*/
+        public async Task<IEnumerable<Account>> Get()=>
             await _accountCollection.Find( account => true).ToListAsync();
-      */
+      
         public async Task Creat(Account account) =>
          await _accountCollection.InsertOneAsync(account);
 

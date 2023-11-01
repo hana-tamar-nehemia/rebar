@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Amazon.Runtime;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace rebar.Models
@@ -6,25 +7,19 @@ namespace rebar.Models
     [BsonIgnoreExtraElements]
     public class Shake
     {
-        [BsonId]
-        private Guid _id;
+        private string _id;
 
-        [BsonElement("name")]
         private string _name;
 
-        [BsonElement("description")]
         private string _description;
 
-        [BsonElement("priceL")]
         private decimal _priceL;
 
-        [BsonElement("priceM")]
         private decimal _priceM;
 
-        [BsonElement("priceS")]
         private decimal _priceS;
 
-        public Guid Id
+        public string Id
         {
             get { return _id; }
             set { _id = value; }
@@ -32,7 +27,7 @@ namespace rebar.Models
 
         public Shake( string name, string description, decimal priceL, decimal priceM, decimal priceS)
         {
-            _id = new Guid();
+            _id = new Guid().ToString();
             _name = name;
             _description = description;
             _priceL = priceL;
@@ -89,5 +84,18 @@ namespace rebar.Models
                     _priceS = value;
             }
         }
+
+        public decimal getPriceBySize(string size)
+        {
+            if (size == "Small")
+                return this.PriceS;
+            if (size == "Medium")
+                return this.PriceM;
+            if (size == "Large")
+                return this.PriceL;
+            return 0;
+        }
     }
+
+
     }
