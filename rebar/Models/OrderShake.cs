@@ -4,16 +4,28 @@ namespace rebar.Models
 {
     public class OrderShake
     {
+        public string _id;
         private string _name;
         private Size _size;
         private decimal _price;
 
         // Constructor
-        public OrderShake(string name, string size, decimal price)
+        public OrderShake(string id ,string name, string size, decimal price)
         {
+            _id = id;
             _name = name;
             _size = (Size)Enum.Parse(typeof(Size), size); 
             _price = price;
+        }
+
+        // Property for _id
+        public string Id
+        {
+            get { return _id; }
+            set
+            {
+               _id = value;
+            }
         }
 
         // Property for _name

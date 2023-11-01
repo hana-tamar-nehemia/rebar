@@ -27,7 +27,7 @@ namespace rebar.Controllers
 
         // GET api/<ShakesController>/5
         [HttpGet("{id}")]
-        public ActionResult<Shake> Get(Guid id)
+        public ActionResult<Shake> Get(string id)
         {
             var shake = _shakeServise.Get(id);
 
@@ -55,7 +55,7 @@ namespace rebar.Controllers
 
         // DELETE api/<ShakesController>/5
         [HttpDelete("{id}")]
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
             _shakeServise.Delete(id);
         }

@@ -5,7 +5,7 @@
         private string _description;
         private int _discountPercent;
 
-                public Discount(string description, int discountPercent)
+        public Discount(string description, int discountPercent)
         {
             _description = description;
             _discountPercent = discountPercent;

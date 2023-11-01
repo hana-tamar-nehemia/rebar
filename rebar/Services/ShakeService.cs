@@ -29,12 +29,12 @@ namespace rebar.Services
             return shake;   
         }
 
-        public void Delete(Guid shakeId)
+        public void Delete(string shakeId)
         {
             throw new NotImplementedException();
         }
 
-        public Shake Get(Guid shakeId)
+        public Shake Get(string shakeId)
         {
             return _shakeCollection.Find(shake => shake.Id == shakeId).FirstOrDefault();
         }

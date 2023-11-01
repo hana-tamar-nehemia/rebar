@@ -29,12 +29,12 @@ namespace rebar.Services
             return order;
         }
 
-        public void Delete(Guid orderId)
+        public void Delete(string orderId)
         {
             throw new NotImplementedException();
         }
 
-        public Order Get(Guid orderId)
+        public Order Get(string orderId)
         {
             return _orderCollection.Find(order => order.Id == orderId).FirstOrDefault();
         }

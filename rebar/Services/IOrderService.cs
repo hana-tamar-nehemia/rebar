@@ -5,8 +5,8 @@ namespace rebar.Services
     public interface IOrderService
     {
         List<Order> Get();
-        Order Get(Guid OrderId);
+        Order Get(string OrderId);
         Order Creat(Order order);
-        void Delete(Guid orderId);
+        void Delete(string orderId);
     }
 }

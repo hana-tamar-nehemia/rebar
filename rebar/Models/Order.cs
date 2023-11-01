@@ -9,7 +9,7 @@ namespace rebar.Models
     [BsonIgnoreExtraElements]
     public class Order
     {
-        private Guid _id;
+        private string _id;
 
         private List<OrderShake> _shakes;
 
@@ -19,15 +19,17 @@ namespace rebar.Models
 
         private DateTime _orderDate;
 
-        private List<Discount> _discounts;
+        private Discount _discounts;
 
-        public Order(List<OrderShake> shakes, decimal totalPrice, string customerName, DateTime orderDate, List<Discount> discounts)
+        private DateTime _endtime;
+        public Order(List<OrderShake> shakes, decimal totalPrice, string customerName, DateTime orderDate, Discount discounts )
         {
-            _id = new Guid();
+            _id = new Guid().ToString();
             _shakes = shakes;
             _totalPrice = totalPrice;
             _customerName = customerName;
             _orderDate = orderDate;
+            _endtime = DateTime.UtcNow;
             _discounts = discounts;
         }
         public List<OrderShake> Shakes
@@ -46,7 +48,7 @@ namespace rebar.Models
             }
         }
 
-        public Guid Id
+        public string Id
         {
             get { return _id; }
             set { _id = value; }
@@ -68,7 +70,13 @@ namespace rebar.Models
             set { _orderDate = value; }
         }
 
-        public List<Discount> Discounts
+        public DateTime EndTime
+        {
+            get { return _orderDate; }
+            set { _orderDate = value; }
+        }
+
+        public Discount Discounts
         {
             get { return _discounts; }
             set { _discounts = value; }

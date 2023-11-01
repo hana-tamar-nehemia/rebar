@@ -12,11 +12,11 @@ builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("R
 builder.Services.AddTransient<IOrderService, OrderService>();
 
 //service to Shake
-builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));//meybe to remove
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));//maybe to remove
 builder.Services.AddTransient<IShakeService, ShakeService>();
 
 //service to Account
-builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));//meybe to remove
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("RebarStoreDtabaseSetting"));//maybe to remove
 builder.Services.AddTransient<IAccountService, AccountService>();
 
 builder.Services.AddControllers();
